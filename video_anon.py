@@ -22,7 +22,7 @@ for i in range(0, len(videos)):
 
 	    if ret == True:
 		    # color argument uses BGR
-		    cv2.rectangle(file_name,(0,0),(1024,75),(0,0,0), -1)
+		    cv2.rectangle(file_name,(0,0),(width,75),(0,0,0), -1)
 		    
 		    out.write(file_name)
 
