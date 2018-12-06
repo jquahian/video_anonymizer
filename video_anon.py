@@ -4,22 +4,25 @@ import os
 
 videos = os.listdir('Data')
 fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-width = 800
-height = 600
-frame_rate = 28.0
 
 for i in range(0, len(videos)):
 	file_path = os.path.join('Data', videos[i])
-	output_path = os.path.join('Output', 'anon_' + videos[i])
-	out = cv2.VideoWriter(output_path, fourcc, frame_rate, (width,height))
 	cap = cv2.VideoCapture(file_path)
+
+	# gets the fps, height, width from the source video
+	frame_rate = cap.get(cv2.CAP_PROP_FPS)
+	height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+	width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+
+	output_path = os.path.join('Output', 'anon_' + videos[i])
+	out = cv2.VideoWriter(output_path, fourcc, frame_rate, (int(width),int(height)))
 
 	while(cap.isOpened()):
 	    ret, file_name = cap.read()
 
 	    if ret == True:
 		    # color argument uses BGR
-		    cv2.rectangle(file_name,(0,0),(500,60),(66,40,33), -1)
+		    cv2.rectangle(file_name,(0,0),(1024,75),(0,0,0), -1)
 		    
 		    out.write(file_name)
 
